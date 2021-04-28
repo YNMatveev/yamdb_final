@@ -1,5 +1,7 @@
 # API_YaMDb
 
+![Yamdb Workflow Status](https://github.com/ynmatveev/yamdb_final/actions/workflows/yamdb_workflow.yml/badge.svg?branch=master&event=push)
+
 ### Описание
 
 
