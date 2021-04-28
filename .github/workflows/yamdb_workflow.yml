@@ -48,19 +48,14 @@ jobs:
     runs-on: ubuntu-latest
     needs: build_and_push_to_docker_hub
     steps:
-      - name: Run a multi-line script
-        run: |
-          mkdir ../build
-          cp -T ./docker-compose.yaml ../build
-          tar -cvf deploy.tar ../build/
       - name: copy file via ssh password
-        uses: appleboy/scp-action@master
+        uses: appleboy/scp-action@v.0.0.10
         with:
           host: ${{ secrets.HOST }}
           username: ${{ secrets.USER }}
           key: ${{ secrets.SSH_KEY }}
           rm: true
-          source: "deploy.tar"
+          source: "docker-compose.yaml"
           target: "yamdb"
 
       - name: executing remote ssh commands to deploy
