@@ -51,7 +51,7 @@ jobs:
       - name: Publish
         uses: nogsantos/scp-deploy@master
         with:
-          src: ./docker-compose.yaml
+          src: docker-compose.yaml
           host: ${{ secrets.HOST }}
           remote: yamdb
           user: ${{ secrets.USER }}
