@@ -51,7 +51,7 @@ jobs:
       - name: Run a multi-line script
         run: |
           mkdir ../build
-          cp -T docker-compose.yaml ../build
+          cp -T ./docker-compose.yaml ../build
           tar -cvf deploy.tar ../build/
       - name: copy file via ssh password
         uses: appleboy/scp-action@master
