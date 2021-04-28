@@ -48,14 +48,14 @@ jobs:
     runs-on: ubuntu-latest
     needs: build_and_push_to_docker_hub
     steps:
-      - name: Publish
-        uses: nogsantos/scp-deploy@master
+      - name: copy files
+        uses: mdallasanta/ssh-scp-deploy@v1.0.4
         with:
-          src: ./dist/docker-compose.yaml
-          host: ${{ secrets.HOST }}
-          remote: yamdb
-          user: ${{ secrets.USER }}
-          key: ${{ secrets.SSH_KEY }}
+          local: './docker-compose.yaml'                                                  # Local file path - REQUIRED false - DEFAULT ./
+          remote: '~/yamdb/'                                                 # Remote file path - REQUIRED false - DEFAULT ~/
+          host: ${{ secrets.HOST }}                                      # Remote server address - REQUIRED true
+          user: ${{ secrets.USER }}                                      # Remote server user - REQUIRED true
+          key: ${{ secrets.SSH_KEY }}                                        # Remote server private key - REQUIRED at least one of "password" or "key"
 
       - name: executing remote ssh commands to deploy
         uses: appleboy/ssh-action@master
