@@ -55,8 +55,8 @@ jobs:
           username: ${{ secrets.USER }}
           key: ${{ secrets.SSH_KEY }}
           rm: true
-          source: "./docker-compose.yaml"
-          target: "./yamdb"
+          source: "build/docker-compose.yaml"
+          target: "yamdb"
 
       - name: executing remote ssh commands to deploy
         uses: appleboy/ssh-action@master
