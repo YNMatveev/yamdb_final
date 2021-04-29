@@ -30,8 +30,9 @@ SECRET_KEY = os.environ.get('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['*']
-
+ALLOWED_HOSTS = [
+    '130.193.57.232', 'localhost', 'ynm-project.online', 'www.ynm-project.online'
+]
 
 # Application definition
 
