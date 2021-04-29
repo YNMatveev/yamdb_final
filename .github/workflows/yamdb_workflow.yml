@@ -57,8 +57,9 @@ jobs:
           host: ${{ secrets.HOST }}
           username: ${{ secrets.USER }}
           key: ${{ secrets.SSH_KEY }}
+          rm: true
           overwrite: true
-          source: "docker-compose.yaml,.env,nginx/default.conf"
+          source: "docker-compose.yaml,.env"
           target: "yamdb"
     
       - name: executing remote ssh commands to deploy
@@ -68,6 +69,7 @@ jobs:
           username: ${{ secrets.USER }}
           key: ${{ secrets.SSH_KEY }}
           script: |
+            sudo chmod -R go+X yamdb
             cd yamdb
             sudo docker pull ynmatveev/yamdb
             sudo docker-compose down
