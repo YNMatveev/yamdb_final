@@ -57,6 +57,7 @@ jobs:
           host: ${{ secrets.HOST }}
           username: ${{ secrets.USER }}
           key: ${{ secrets.SSH_KEY }}
+          overwrite: true
           source: "docker-compose.yaml,.env"
           target: "yamdb"
     
@@ -67,7 +68,6 @@ jobs:
           username: ${{ secrets.USER }}
           key: ${{ secrets.SSH_KEY }}
           script: |
-            sudo chmod -R 0777 yamdb
             cd yamdb
             sudo docker pull ynmatveev/yamdb
             sudo docker-compose down
