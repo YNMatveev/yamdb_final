@@ -57,10 +57,10 @@ jobs:
           host: ${{ secrets.HOST }}
           username: ${{ secrets.USER }}
           key: ${{ secrets.SSH_KEY }}
+          rm: true
           source: "docker-compose.yaml,.env,nginx/*"
           target: "yamdb"
-          rm: true
-        
+    
       - name: executing remote ssh commands to deploy
         uses: appleboy/ssh-action@master
         with:
