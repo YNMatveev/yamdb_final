@@ -57,7 +57,8 @@ jobs:
           host: ${{ secrets.HOST }}
           username: ${{ secrets.USER }}
           key: ${{ secrets.SSH_KEY }}
-          source: "docker-compose.yaml,.env"
+          rm: true
+          source: "docker-compose.yaml,.env,nginx/default.conf"
           target: "yamdb"
     
       - name: executing remote ssh commands to deploy
