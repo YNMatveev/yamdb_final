@@ -1,6 +1,9 @@
 name: Yamdb workflow
 
-on: [push]
+on:
+  push:
+    brances:
+    - main
 
 jobs:
   tests:
