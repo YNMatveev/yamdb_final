@@ -152,3 +152,5 @@ media/
 sent_emails/*
 .env
 req_praktikum.txt
+tmp/*
+tmp

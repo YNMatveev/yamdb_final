@@ -25,3 +25,4 @@ req_praktikum.txt
 data/*
 data
 .env
+tmp/*
