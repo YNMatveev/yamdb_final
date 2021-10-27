@@ -20,6 +20,41 @@ API_YaMDb – это то REST API сервис, который собирает
 - nginx 1.19.3
 - docker
 
+### Демо приложения
+
+ Приложение развернуто по адресу: http://yamdb.ynm-project.online/api/v1/ и можно проверить его функциональность.
+
+ Детальное описание эндпоинтов и разрешенных методов доступно по адресу: http://yamdb.ynm-project.online/redoc/
+
+ Для GET запросов аутенфикация не нужна, и можно получить данные по следующим эндпоинтам:
+
+ - http://yamdb.ynm-project.online/api/v1/titles/{title_id}/reviews/
+ - http://yamdb.ynm-project.online/api/v1/titles/{title_id}/reviews/{review_id}/comments/
+ - http://yamdb.ynm-project.online/api/v1/categories/
+ - http://yamdb.ynm-project.online/api/v1/genres/
+ - http://yamdb.ynm-project.online/api/v1/titles/
+
+Для методов POST, PATCH, DELETE необходимо получение JWT-токена. Для этого нужно отправить
+POST запрос на адрес http://yamdb.ynm-project.online/api/v1/auth/email/ с указание email в теле запроса.
+
+```json
+{
+    "email" : "my@email.com"
+}
+```
+
+На указанный email придет сообщение с кодом подтверждения.
+Для получения JWT-токена нужно отправить POST запрос с кодом подтверждения и email в теле на адрес http://yamdb.ynm-project.online/api/v1/auth/token/
+
+```json
+{
+    "email": "my@email.com",
+    "confirmation_code": "your confirmation code"
+}
+```
+
+В ответе в ключе "access" придет сгенерированный JWT-токен.
+
 ### Запуск приложения
 
 Для запуска приложения вам потребуется установить git ([Установка git](https://git-scm.com/book/ru/v2/Введение-Установка-Git))  и docker ([Установка docker](https://www.docker.com/get-started)) на ваш компьютер.
@@ -35,7 +70,7 @@ $ git clone https://github.com/YNMatveev/infra_sp2.git
 выполните в терминале команду:
 
 ```bash
-$ docker compose up -d
+$ sudo docker-compose up -d
 ```
 
 Докер соберет необходимые образы и запустит контейнеры в фоновом режиме.
@@ -44,15 +79,15 @@ $ docker compose up -d
 
 Для подготовки базы данных в терминале выполните команды:
 ```bash
-$ docker compose exec web python manage.py makemigrations --noinput
-$ docker compose exec web python manage.py migrate --noinput
+$ sudo docker-compose exec web python manage.py makemigrations --noinput
+$ sudo docker-compose exec web python manage.py migrate --noinput
 ```
 
 ### Создание суперпользователя и доступ к админке
 Для создания суперпользователя в терминале выполните команду (заменив username, you_password и admin@email.fake на нужные):
 
 ```bash
-$ docker compose exec web bash -c \
+$ sudo docker-compose exec web bash -c \
 "DJANGO_SUPERUSER_USERNAME=your_username \
 DJANGO_SUPERUSER_PASSWORD=your_password \
 DJANGO_SUPERUSER_EMAIL=admin@email.fake \
@@ -61,13 +96,13 @@ python manage.py createsuperuser --noinput"
 или с вводом нужных вам данных в терминале
 
 ```bash
-$ docker compose exec web python manage.py createsuperuser
+$ sudo docker-compose exec web python manage.py createsuperuser
 ```
 
 Чтобы удобнее было работать через админку необходимо собрать статику проекта. Для этого выполните команду:
 
 ```bash
-$ docker compose exec web python manage.py collectstatic --noinput
+$ sudo docker-compose exec web python manage.py collectstatic --noinput
 ```
 
 
@@ -80,7 +115,7 @@ $ docker compose exec web python manage.py collectstatic --noinput
 Для того чтобы добавить эти данные в базу данных в терминале выполните команду:
 
 ```bash
-$ docker compose exec web python manage.py loaddata fixtures.json
+$ sudo docker-compose exec web python manage.py loaddata fixtures.json
 ```
 
 Дополнительных манипуляций с базой данных делать не нужно. При формировании fixtures.json были исключены следующие таблицы:
