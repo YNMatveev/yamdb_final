@@ -55,9 +55,13 @@ def send_email(request):
         user.save()
 
     send_mail(
-        'Confirmation_code',
+        'Confirmation_code для получения токена на yamdb.ynm-project.online',
         (f'Вы отправили запрос на confirmation_code для адреса {user.email}.\n'
-         f'confirmation_code = {user.confirmation_code}'),
+         f'confirmation_code: {user.confirmation_code}\n\n'
+         'Для получения JWT-токена, направьте POST запрос на адрес:\n'
+         'http://yamdb.ynm-project.online/api/v1/auth/token/\n'
+         'В теле запроса отправьте ваш email и полученный код.\n\n'
+         'С уважением, команда yamdb.ynm-project.online'),
         settings.ADMIN_EMAIL,
         [email],
         fail_silently=False,
@@ -73,6 +77,6 @@ def generate_jwttoken(request):
     user = get_object_or_404(User, email=email)
     if default_token_generator.check_token(user, confirmation_code):
         refresh = RefreshToken.for_user(user)
-        data = {'refresh': str(refresh), 'access': str(refresh.access_token)}
+        data = {'refresh': str(refresh), 'token': str(refresh.access_token)}
         return Response(data, status=status.HTTP_200_OK)
     return Response(status=status.HTTP_400_BAD_REQUEST)
