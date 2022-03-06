@@ -28,8 +28,8 @@ API_YaMDb – это REST API сервис, который собирает от
 
  Для GET запросов аутенфикация не нужна, и можно получить данные по следующим эндпоинтам:
 
- - http://yamdb.ynm-project.online/api/v1/titles/{title_id}/reviews/
- - http://yamdb.ynm-project.online/api/v1/titles/{title_id}/reviews/{review_id}/comments/
+ - http://yamdb.ynm-project.online/api/v1/titles/1/reviews/
+ - http://yamdb.ynm-project.online/api/v1/titles/1/reviews/{review_id}/comments/
  - http://yamdb.ynm-project.online/api/v1/categories/
  - http://yamdb.ynm-project.online/api/v1/genres/
  - http://yamdb.ynm-project.online/api/v1/titles/
